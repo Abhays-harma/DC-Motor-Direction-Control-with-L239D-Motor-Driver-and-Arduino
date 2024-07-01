@@ -1,0 +1,55 @@
+const int motorPin1 = 9; // Input 1 of L239D
+const int motorPin2 = 10; // Input 2 of L239D
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(motorPin1, OUTPUT);
+  pinMode(motorPin2, OUTPUT);
+  stopMotor();
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char command = Serial.read();
+    switch (command) {
+      case 'W':
+        forward();
+        break;
+      case 'S':
+        backward();
+        break;
+      case 'A':
+        left();
+        break;
+      case 'D':
+        right();
+        break;
+      default:
+        stopMotor();
+        break;
+    }
+  }
+}
+
+void forward() {
+  digitalWrite(motorPin1, HIGH);
+  digitalWrite(motorPin2, LOW);
+}
+
+void backward() {
+  digitalWrite(motorPin1, LOW);
+  digitalWrite(motorPin2, HIGH);
+}
+
+void left() {
+  // Implement left turn logic if needed
+}
+
+void right() {
+  // Implement right turn logic if needed
+}
+
+void stopMotor() {
+  digitalWrite(motorPin1, LOW);
+  digitalWrite(motorPin2, LOW);
+}
